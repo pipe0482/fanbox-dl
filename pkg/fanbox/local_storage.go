@@ -15,9 +15,10 @@ import (
 )
 
 type LocalStorage struct {
-	SaveDir   string
-	DirByPost bool
-	DirByPlan bool
+	SaveDir    string
+	DirByPost  bool
+	DirByPlan  bool
+	DirByMonth bool
 
 	RemoveUnprintableChars bool
 }
@@ -106,12 +107,18 @@ func (s *LocalStorage) makeFileName(post Post, order int, d Downloadable) string
 		planDir = fmt.Sprintf("%dyen", post.FeeRequired)
 	}
 
+	monthDir := ""
+	if s.DirByMonth {
+		monthDir = s.limitOsSafely(date.UTC().Format("2006-01"))
+	}
+
 	if s.DirByPost {
 		// [SaveDirectory]/[CreatorID]/2006-01-02-[Post Title]/[Order]-[ID].[Extension]
 		return filepath.Join(
 			s.SaveDir,
 			post.CreatorID,
 			planDir,
+			monthDir,
 			s.limitOsSafely(fmt.Sprintf("%s-%s", date.UTC().Format("2006-01-02"), title)),
 			fmt.Sprintf("%s%d-%s.%s", fileType, order, d.GetID(), d.GetExtension()),
 		)
@@ -122,6 +129,7 @@ func (s *LocalStorage) makeFileName(post Post, order int, d Downloadable) string
 		s.SaveDir,
 		post.CreatorID,
 		planDir,
+		monthDir,
 		fmt.Sprintf(
 			"%s.%s",
 			s.limitOsSafely(

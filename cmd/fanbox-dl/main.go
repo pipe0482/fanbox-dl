@@ -86,6 +86,11 @@ var dirByPlanFlag = &cli.BoolFlag{
 	Value: false,
 	Usage: "Whether to separate save directories by plan.",
 }
+var dirByMonthFlag = &cli.BoolFlag{
+	Name:  "dir-by-month",
+	Value: false,
+	Usage: "Whether to separate save directories by month.",
+}
 var allFlag = &cli.BoolFlag{
 	Name:  "all",
 	Value: false,
@@ -149,6 +154,7 @@ var app = &cli.App{
 		saveDirFlag,
 		dirByPostFlag,
 		dirByPlanFlag,
+		dirByMonthFlag,
 		userAgentFlag,
 		allFlag,
 		supportingFlag,
@@ -210,9 +216,10 @@ var app = &cli.App{
 			SkipOnError:       c.Bool(skipOnErrorFlag.Name),
 			OfficialAPIClient: api,
 			Storage: &fanbox.LocalStorage{
-				SaveDir:   c.String(saveDirFlag.Name),
-				DirByPost: c.Bool(dirByPostFlag.Name),
-				DirByPlan: c.Bool(dirByPlanFlag.Name),
+				SaveDir:    c.String(saveDirFlag.Name),
+				DirByPost:  c.Bool(dirByPostFlag.Name),
+				DirByPlan:  c.Bool(dirByPlanFlag.Name),
+				DirByMonth: c.Bool(dirByMonthFlag.Name),
 
 				RemoveUnprintableChars: c.Bool(removeUnprintableCharsFlag.Name),
 			},
