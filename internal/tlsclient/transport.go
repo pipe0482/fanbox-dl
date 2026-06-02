@@ -18,7 +18,7 @@ var _ http.RoundTripper = (*Transport)(nil)
 // NewTransportWithOptions creates a new Transport with the given options
 func NewTransportWithOptions(logger tls_client.Logger, options ...tls_client.HttpClientOption) (*Transport, error) {
 	// Ensure no redirect following for RoundTripper compatibility
-	options = append(options, tls_client.WithNotFollowRedirects())
+	options = append(options, tls_client.WithNotFollowRedirects(), tls_client.WithTimeoutSeconds(180))
 
 	client, err := tls_client.NewHttpClient(logger, options...)
 	if err != nil {
