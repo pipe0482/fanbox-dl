@@ -10,6 +10,7 @@ require (
 	github.com/hashicorp/go-retryablehttp v0.7.8
 	github.com/stretchr/testify v1.11.1
 	github.com/urfave/cli/v2 v2.27.7
+	go.uber.org/ratelimit v0.3.1
 	golang.org/x/mod v0.36.0
 	golang.org/x/net v0.55.0
 )
@@ -18,6 +19,7 @@ require (
 	github.com/andybalholm/brotli v1.2.1 // indirect
 	github.com/bdandy/go-errors v1.2.2 // indirect
 	github.com/bdandy/go-socks4 v1.2.3 // indirect
+	github.com/benbjohnson/clock v1.3.0 // indirect
 	github.com/bogdanfinn/quic-go-utls v1.0.9-utls // indirect
 	github.com/bogdanfinn/utls v1.7.7-barnius // indirect
 	github.com/bogdanfinn/websocket v1.5.5-barnius // indirect
